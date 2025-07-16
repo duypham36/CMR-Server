@@ -50,7 +50,7 @@ fun main() {
 }
 
 
-// --- Module chính cấu hình ứng dụng Ktor ---
+// --- Module chính cấu hình ứng dụng Ktor ---d
 
 fun Application.module() {
     // Cài đặt các plugin cần thiết
