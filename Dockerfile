@@ -27,5 +27,5 @@ COPY --from=build /home/gradle/src/build/libs/CMR-Server-0.0.1-all.jar .
 # Mở cổng 10000 để nhận kết nối (Render yêu cầu cổng này)
 EXPOSE 10000
 
-# Lệnh để khởi động máy chủ khi container chạy
+# Lệnh để khởi động máy chủ khi container chạyd
 CMD ["java", "-jar", "CMR-Server-0.0.1-all.jar"]
