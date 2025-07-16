@@ -19,6 +19,8 @@ application {
 
 // Cấu hình cho plugin shadow
 tasks.shadowJar {
+    archiveBaseName.set("CMR-Server")
+    archiveClassifier.set("all")
     manifest {
         attributes["Main-Class"] = "com.example.ApplicationKt"
     }
