@@ -21,11 +21,11 @@ FROM openjdk:11-jre-slim
 # Đặt thư mục làm việc
 WORKDIR /app
 
-# Sao chép file .jar đã được tạo ra ở giai đoạn 1 vào container này
-COPY --from=build /home/gradle/src/build/libs/CMR-Server-0.0.1-all.jar .
+# SỬA LỖI: Sao chép file .jar bằng ký tự đại diện (*) và đổi tên nó thành application.jar
+COPY --from=build /home/gradle/src/build/libs/*.jar application.jar
 
 # Render sẽ tự động mở cổng 10000
 EXPOSE 10000
 
-# Lệnh để khởi động máy chủ khi container chạy
-CMD ["java", "-jar", "CMR-Server-0.0.1-all.jar"]
+# SỬA LỖI: Chạy file application.jar đã được đổi tên
+CMD ["java", "-jar", "application.jar"]
