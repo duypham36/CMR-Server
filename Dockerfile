@@ -11,7 +11,6 @@ COPY . .
 # Chạy lệnh Gradle để tạo ra file .jar duy nhất (fat jar)
 # Lệnh này sẽ tự động tải các thư viện cần thiết
 RUN gradle shadowJar --no-daemon
-
 # --- Giai đoạn 2: Chạy ứng dụng ---
 # Sử dụng một ảnh nền nhẹ chỉ có Java để chạy
 FROM openjdk:11-jre-slim
