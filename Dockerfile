@@ -1,4 +1,4 @@
-# --- Giai đoạn 1: Xây dựng ứng dụng ---
+ --- Giai đoạn 1: Xây dựng ứng dụng ---
 # Sử dụng một ảnh nền có sẵn Gradle và Java 11 để xây dựng
 FROM gradle:7.6.1-jdk11 AS build
 
@@ -8,9 +8,12 @@ WORKDIR /home/gradle/src
 # Sao chép toàn bộ mã nguồn của dự án vào container
 COPY . .
 
-# Chạy lệnh Gradle để tạo ra file .jar duy nhất (fat jar)
-# Lệnh này sẽ tự động tải các thư viện cần thiết
-RUN gradle shadowJar --no-daemon
+# SỬA LỖI: Cấp quyền thực thi cho Gradle wrapper
+RUN chmod +x ./gradlew
+
+# SỬA LỖI: Chạy lệnh Gradle bằng wrapper để tạo ra file .jar
+RUN ./gradlew shadowJar --no-daemon
+
 # --- Giai đoạn 2: Chạy ứng dụng ---
 # Sử dụng một ảnh nền nhẹ chỉ có Java để chạy
 FROM openjdk:11-jre-slim
