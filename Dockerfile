@@ -1,4 +1,4 @@
- --- Giai đoạn 1: Xây dựng ứng dụng ---
+# --- Giai đoạn 1: Xây dựng ứng dụng ---
 # Sử dụng một ảnh nền có sẵn Gradle và Java 11 để xây dựng
 FROM gradle:7.6.1-jdk11 AS build
 
@@ -8,10 +8,10 @@ WORKDIR /home/gradle/src
 # Sao chép toàn bộ mã nguồn của dự án vào container
 COPY . .
 
-# SỬA LỖI: Cấp quyền thực thi cho Gradle wrapper
+# Cấp quyền thực thi cho Gradle wrapper
 RUN chmod +x ./gradlew
 
-# SỬA LỖI: Chạy lệnh Gradle bằng wrapper để tạo ra file .jar
+# Chạy lệnh Gradle bằng wrapper để tạo ra file .jar
 RUN ./gradlew shadowJar --no-daemon
 
 # --- Giai đoạn 2: Chạy ứng dụng ---
@@ -24,8 +24,8 @@ WORKDIR /app
 # Sao chép file .jar đã được tạo ra ở giai đoạn 1 vào container này
 COPY --from=build /home/gradle/src/build/libs/CMR-Server-0.0.1-all.jar .
 
-# Mở cổng 10000 để nhận kết nối (Render yêu cầu cổng này)
+# Render sẽ tự động mở cổng 10000
 EXPOSE 10000
 
-# Lệnh để khởi động máy chủ khi container chạyd
+# Lệnh để khởi động máy chủ khi container chạy
 CMD ["java", "-jar", "CMR-Server-0.0.1-all.jar"]
